@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    
+    <!-- tailwind+daisy -->
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font-awesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+     <!-- google-font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&    display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            font-family: 'Geist', sans-serif;
+            
+            
+        }
+    </style>
+
+</head>
+<body class=" bg-[#F8FAFC] h-auto">
+    <div class=" bg-[#F8FAFC] h-[55px]"></div>
+    <section class="header w-[1110px] h-[149px]  mx-auto">
+        <div class="tittle text-[#002C5C] font-bold text-[28px] ">
+            <h1>Job Application Tracker</h1>
+
+        </div>
+
+        <div class="card flex flex-row gap-4  border-none mt-3  ">
+            <div class="total w-[360px] h-[97px] p-5 card-border border-[#F1F2F4] bg-white rounded-lg">
+                <h6 class="text-[14px]">Total</h6>
+                <p class=" text-[#002C5C] font-bold pt-2">8</p>
+
+            </div>
+
+            <div class=" w-[360px] h-[97px] p-5 card-border border-[#F1F2F4]  bg-white rounded-lg">
+                <h6 class="text-[14px]">Interview</h6>
+                <p class=" font-bold pt-2 text-green-500">0</p>
+
+            </div>
+
+            <div class="w-[360px] h-[97px] p-5 card-border border-[#F1F2F4] bg-white rounded-lg">
+                <h6 class="text-[14px]">Rejected</h6>
+                <p class=" font-bold pt-2 text-red-600">0</p>
+
+            </div>   
+
+        </div>
+
+    </section>
+
+     <div class="h-[1.5px] w-[1110px] mx-auto mt-8 bg-[#E6E7E9]"></div>
+   
+   <!-- main sec -->
+
+     <section class=" w-[1110px] mt-7.5 mx-auto bg-[#F8FAFC]">
+        <div>
+            <h1 class="text-[#002C5C] font-semibold text-[20px]">Available Jobs</h1>
+            <p class="flex flex-row justify-end mt-[-20px] text-[#64748B] text-[16px]">8 jobs</p>
+
+
+            <div class="gap-2 pt-6">
+
+                <button class="btn w-[80px] h-[32px] bg-white text-[#64748B]">All</button>
+                <button class="btn w-[80px] h-[32px] text-white bg-blue-500">Interview</button>
+                <button class="btn w-[80px] h-[32px] text-[#64748B] bg-white">Rejected</button>
+            </div>
+
+            <div class="card flex justify-center   bg-white w-[1110px] h-[400px] shadow-sm mt-4 " >
+                <div class="flex justify-center ">
+                    <img src="jobs.png" alt="page">
+                </div>
+                <div class=" text-center mt-4 gap-1">
+                    <p class="text-[#002C5C] text-[24px] font-semibold">No jobs available</p>
+                    <p class="text-[#64748B] text-[16px] ">Check back soon for new job opportunities</p>
+                </div>
+                
+
+            </div>
+
+           
+
+
+
+
+
+
+         
+
+
+        </div>
+     </section>
+    
+    
+</body>
+</html>
