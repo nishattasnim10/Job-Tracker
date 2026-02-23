@@ -19,16 +19,19 @@
 
     <style>
         *{
-            font-family: 'Geist', sans-serif;
-            
-            
+            font-family: 'Geist', sans-serif;      
         }
+        #hidden-main{
+            display: none;
+        }
+
     </style>
 
 </head>
 <body class=" bg-[#F8FAFC] h-[3000px] ">
     <div class=" bg-[#F8FAFC] h-[55px]"></div>
-    <section class="header w-[1110px] h-[149px]  mx-auto">
+
+    <header class="header w-[1110px] h-[149px]  mx-auto">
         <div class="tittle text-neutral font-bold text-[28px] ">
             <h1>Job Application Tracker</h1>
 
@@ -37,31 +40,31 @@
         <div class="card flex flex-row gap-4  border-none mt-3  ">
             <div class="total w-[360px] h-[97px] p-5 card-border border-[#F1F2F4] bg-white rounded-lg">
                 <h6 class="text-[14px]">Total</h6>
-                <p class=" font-bold pt-2">8</p>
+                <p id="total-count" class=" font-bold pt-2">8</p>
 
             </div>
 
             <div class=" w-[360px] h-[97px] p-5 card-border border-[#F1F2F4]  bg-white rounded-lg">
                 <h6 class="text-[14px]">Interview</h6>
-                <p class=" font-bold pt-2 text-green-500">0</p>
+                <p id="interview-count" class="font-bold pt-2 text-green-500">0</p>
 
             </div>
 
             <div class="w-[360px] h-[97px] p-5 card-border border-[#F1F2F4] bg-white rounded-lg">
                 <h6 class="text-[14px]">Rejected</h6>
-                <p class=" font-bold pt-2 text-red-600">0</p>
+                <p id="rejected-count" class=" font-bold pt-2 text-red-600">0</p>
 
             </div>   
 
         </div>
 
-    </section>
+    </header>
 
      <div class="h-[1.5px] w-[1110px] mx-auto mt-8 bg-[#E6E7E9]"></div>
    
    <!-- main sec -->
 
-     <section class=" w-[1110px]  mt-7.5 mx-auto bg-[#F8FAFC]">
+     <main class=" w-[1110px]  mt-7.5 mx-auto bg-[#F8FAFC]">
         <div>
             <h1 class="font-semibold text-[20px]">Available Jobs</h1>
             <p class="flex flex-row justify-end mt-[-20px] text-[#64748B] text-[16px]">8 jobs</p>
@@ -69,12 +72,14 @@
 
             <div class="gap-2 pt-6">
 
-                <button class="btn w-[80px] h-[32px] bg-blue-500 text-white">All</button>
-                <button class="btn w-[80px] h-[32px] text-[#64748B] bg-white">Interview</button>
-                <button class="btn w-[80px] h-[32px] text-[#64748B] bg-white">Rejected</button>
+                <button onclick="toggleStyle('all-filter-btn')" id="all-filter-btn" class="btn w-[80px] h-[32px] bg-blue-500 text-white">All</button>
+                <button onclick="toggleStyle('interview-filter-btn')" id="interview-filter-btn" class="btn w-[80px] h-[32px] text-[#64748B] bg-white">Interview</button>
+                <button onclick="toggleStyle('rejected-filter-btn')" id="rejected-filter-btn" class="btn w-[80px] h-[32px] text-[#64748B] bg-white">Rejected</button>
             </div>
+   <!-- CARDS -->
 
-            <div class="card bg-white w-[1110px] h-[295px] shadow-sm mt-4 mx-auto" >
+        <section id="allCards">
+          <div class="card bg-white w-[1110px] h-[295px] shadow-sm mt-4 mx-auto" >
                 <div class="px-6">
                      <h2 class="mt-6 font-semibold text-[18px]">Mobile First Corp</h2>
                      <p class="text-[16px] text-[#64748B] mt-1">React Native Developer</p>
@@ -82,29 +87,24 @@
                        <button class=" flex justify-end p-[8px] cursor-pointer rounded-full border border-slate-200 mt-[-30px]" > <i class="fa-regular fa-trash-can " style="color: #64748B;"></i></button>
                       </div>    
                 </div>
-
-
-                 <div class="px-6 text-[14px] text-[#64748B] mt-4"><p>Remote • Full-time • $130,000 - $175,000</p></div>
+                 <div class="px-6 text-[14px] text-[#64748B] mt-4"><p>Remote •     Full-time • $130,000 - $175,000</p></div>
 
                  <div class="px-6 mt-5 ">
-                      <div><button class="btn font-medium bg-[#EEF4FF] text-[14px] rounded-[4px]">Not Applied</button></div>
+                      <div><button id="not-applied-btn" class="btn font-medium bg-[#EEF4FF] text-[14px] rounded-[4px]">Not Applied</button></div>
                       <p class="text-[#323B49] mt-2 ">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
                     </div>
-
-
-
               <div class="card-actions justify-start px-6 mt-5 gap-2">
                    <div class="">
-                        <button class="btn text-[14px] text-green-500 border-green-600">Interview</button>
+                        <button  class="interview-btn btn text-[14px] text-green-500 border-green-600">Interview</button>
                     </div>
                     <div class="">
-                         <button class="btn font-[24px] text-red-500 border-red-600">Rejected</button>
+                         <button class="rejected-btn btn font-[24px] text-red-500 border-red-600">Rejected</button>
 
                     </div>
                 
                 </div>
 
-            </div>
+          </div>
 
             <!-- 2 -->
 
@@ -130,10 +130,10 @@
 
               <div class="card-actions justify-start px-6 mt-5 gap-2">
                    <div class="">
-                        <button class="btn text-[14px] text-green-500 border-green-600">Interview</button>
+                        <button class="interview-btn btn text-[14px] text-green-500 border-green-600">Interview</button>
                     </div>
                     <div class="">
-                         <button class="btn font-[24px] text-red-500 border-red-600">Rejected</button>
+                         <button class="rejected-btn btn font-[24px] text-red-500 border-red-600">Rejected</button>
 
                     </div>
                 
@@ -164,10 +164,10 @@
 
               <div class="card-actions justify-start px-6 mt-5 gap-2">
                    <div class="">
-                        <button class="btn text-[14px] text-green-500 border-green-600">Interview</button>
+                        <button class="interview-btn btn text-[14px] text-green-500 border-green-600">Interview</button>
                     </div>
                     <div class="">
-                         <button class="btn font-[24px] text-red-500 border-red-600">Rejected</button>
+                         <button class="rejected-btn btn font-[24px] text-red-500 border-red-600">Rejected</button>
 
                     </div>
                 
@@ -198,10 +198,10 @@
 
               <div class="card-actions justify-start px-6 mt-5 gap-2">
                    <div class="">
-                        <button class="btn text-[14px] text-green-500 border-green-600">Interview</button>
+                        <button class="interview-btn btn text-[14px] text-green-500 border-green-600">Interview</button>
                     </div>
                     <div class="">
-                         <button class="btn font-[24px] text-red-500 border-red-600">Rejected</button>
+                         <button class="rejected-btn btn font-[24px] text-red-500 border-red-600">Rejected</button>
 
                     </div>
                 
@@ -232,10 +232,10 @@
 
               <div class="card-actions justify-start px-6 mt-5 gap-2">
                    <div class="">
-                        <button class="btn text-[14px] text-green-500 border-green-600">Interview</button>
+                        <button class="interview-btn btn text-[14px] text-green-500 border-green-600">Interview</button>
                     </div>
                     <div class="">
-                         <button class="btn font-[24px] text-red-500 border-red-600">Rejected</button>
+                         <button class="rejected-btn btn font-[24px] text-red-500 border-red-600">Rejected</button>
 
                     </div>
                 
@@ -265,10 +265,10 @@
 
               <div class="card-actions justify-start px-6 mt-5 gap-2">
                    <div class="">
-                        <button class="btn text-[14px] text-green-500 border-green-600">Interview</button>
+                        <button class="interview-btn btn text-[14px] text-green-500 border-green-600">Interview</button>
                     </div>
                     <div class="">
-                         <button class="btn font-[24px] text-red-500 border-red-600">Rejected</button>
+                         <button class="rejected-btn btn font-[24px] text-red-500 border-red-600">Rejected</button>
 
                     </div>
                 
@@ -299,10 +299,10 @@
 
               <div class="card-actions justify-start px-6 mt-5 gap-2">
                    <div class="">
-                        <button class="btn text-[14px] text-green-500 border-green-600">Interview</button>
+                        <button class="interview-btn btn text-[14px] text-green-500 border-green-600">Interview</button>
                     </div>
                     <div class="">
-                         <button class="btn font-[24px] text-red-500 border-red-600">Rejected</button>
+                         <button class="rejected-btn btn font-[24px] text-red-500 border-red-600">Rejected</button>
 
                     </div>
                 
@@ -333,10 +333,10 @@
 
               <div class="card-actions justify-start px-6 mt-5 gap-2">
                    <div class="">
-                        <button class="btn text-[14px] text-green-500 border-green-600">Interview</button>
+                        <button class="interview-btn btn text-[14px] text-green-500 border-green-600">Interview</button>
                     </div>
                     <div class="">
-                         <button class="btn font-[24px] text-red-500 border-red-600">Rejected</button>
+                         <button class="rejected-btn btn font-[24px] text-red-500 border-red-600">Rejected</button>
 
                     </div>
                 
@@ -344,16 +344,88 @@
 
             </div>
 
+        </section>   
+
+        
+     </main>
 
 
 
 
 
-         
-
+     <!-- not found part -->
+<section id="hidden-main" class="bg-[#F8FAFC] h-auto">    
+    
+    <div class=" bg-[#F8FAFC] h-[55px]"></div>
+    <section class="header w-[1110px] h-[149px]  mx-auto">
+        <div class="tittle text-[#002C5C] font-bold text-[28px] ">
+            <h1>Job Application Tracker</h1>
 
         </div>
+
+        <div class="card flex flex-row gap-4  border-none mt-3  ">
+            <div class="total w-[360px] h-[97px] p-5 card-border border-[#F1F2F4] bg-white rounded-lg">
+                <h6 class="text-[14px]">Total</h6>
+                <p class=" text-[#002C5C] font-bold pt-2">8</p>
+
+            </div>
+
+            <div class=" w-[360px] h-[97px] p-5 card-border border-[#F1F2F4]  bg-white rounded-lg">
+                <h6 class="text-[14px]">Interview</h6>
+                <p class=" font-bold pt-2 text-green-500">0</p>
+
+            </div>
+
+            <div class="w-[360px] h-[97px] p-5 card-border border-[#F1F2F4] bg-white rounded-lg">
+                <h6 class="text-[14px]">Rejected</h6>
+                <p class=" font-bold pt-2 text-red-600">0</p>
+
+            </div>   
+
+        </div>
+
+    </section>
+
+     <div class="h-[1.5px] w-[1110px] mx-auto mt-8 bg-[#E6E7E9]"></div>
+   
+   <!-- main sec -->
+
+<section class=" w-[1110px] mt-7.5 mx-auto bg-[#F8FAFC]">
+        <div>
+            <h1 class="text-[#002C5C] font-semibold text-[20px]">Available Jobs</h1>
+            <p class="flex flex-row justify-end mt-[-20px] text-[#64748B] text-[16px]">8 jobs</p>
+
+
+            <div class="gap-2 pt-6">
+
+                <button class="btn w-[80px] h-[32px] bg-white text-[#64748B]">All</button>
+                <button class="btn w-[80px] h-[32px] text-white bg-blue-500">Interview</button>
+                <button class="btn w-[80px] h-[32px] text-[#64748B] bg-white">Rejected</button>
+            </div>
+
+            <div class="card flex justify-center   bg-white w-[1110px] h-[400px] shadow-sm mt-4 " >
+                <div class="flex justify-center ">
+                    <img src="jobs.png" alt="page">
+                </div>
+                <div class=" text-center mt-4 gap-1">
+                    <p class="text-[#002C5C] text-[24px] font-semibold">No jobs available</p>
+                    <p class="text-[#64748B] text-[16px] ">Check back soon for new job opportunities</p>
+                </div>
+                
+
+            </div>
+        </div>
      </section>
+</section>   
+
+
+
+     
+     
+     
+     
+     
+     <script src="script.js"></script>
     
     
 </body>
