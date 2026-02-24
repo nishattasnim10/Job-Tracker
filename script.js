@@ -61,9 +61,9 @@ const rejectedFilterBtn=document.getElementById("rejected-filter-btn");
 
 mainSection.addEventListener("click",function(event){
 
-    console.log(event.target);
+    // console.log(event.target);
 
-    console.log(event.target.classList.contains("interview-btn"));
+    // console.log(event.target.classList.contains("interview-btn"));
     if(event.target.classList.contains("interview-btn")){
         console.log(event.target.parentNode.parentNode.parentNode);
     const jobCard=event.target.parentNode.parentNode.parentNode;
@@ -75,13 +75,19 @@ mainSection.addEventListener("click",function(event){
     const description=jobCard.querySelector('.description').innerText;
     // console.log(jobName,position,salary,statusBtn,description);
 
-    const cardInfo={jobName,position,salary,statusBtn,description};
+    
+    jobCard.querySelector('.status-btn').innerText='Interview';
+    jobCard.querySelector('.status-btn').classList.remove("bg-[#EEF4FF]","text-[14px]");
+    jobCard.querySelector('.status-btn').classList.add("bg-green-100","text-green-600", "border", "border-green-700");
+    
+    // CARD InFO OBJECT
+    const cardInfo={jobName,position,salary,statusBtn:'Interview',description};
     
 
     const cardExist = interviewList.find(item =>item.jobName == cardInfo.jobName);
-    jobCard.querySelector('.status-btn').innerText="Interview";
-    jobCard.querySelector('.status-btn').classList.remove("bg-[#EEF4FF]","text-[14px]");
-    jobCard.querySelector('.status-btn').classList.add("bg-green-100","text-green-600", "border", "border-green-700");
+
+    
+    
 
 
     if(!cardExist){
@@ -96,27 +102,29 @@ mainSection.addEventListener("click",function(event){
 
  const filteredSection=document.getElementById("filtered-section");
  function renderInterviewList(){
-    filteredSection.innerHTML="";
+    filteredSection.innerHTML='';
 
     for(let i=0;i<interviewList.length;i++){
         console.log(interviewList);
+    
+    
 
         let div=document.createElement("div");
 
         div.className="card bg-white w-[1110px] h-[295px] shadow-sm mt-4 mx-auto";
         div.innerHTML=`
         <div class="px-6">
-                     <h2 id="company-name" class="mt-6 font-semibold text-[18px]">Mobile First Corp</h2>
-                     <p id="position" class="text-[16px] text-[#64748B] mt-1">React Native Developer</p>
+                     <h2 id="" class="company-name mt-6 font-semibold text-[18px]">${interviewList[i].jobName}</h2>
+                     <p id="" class="position text-[16px] text-[#64748B] mt-1">${interviewList[i].position}</p>
                       <div  class="flex justify-end" >
                        <button class=" flex justify-end p-[8px] cursor-pointer rounded-full border border-slate-200 mt-[-30px]" > <i class="fa-regular fa-trash-can " style="color: #64748B;"></i></button>
                       </div>    
                 </div>
-                 <div  class="px-6 text-[14px] text-[#64748B] mt-4"><p class="salary">Remote •     Full-time • $130,000 - $175,000</p></div>
+                 <div  class="px-6 text-[14px] text-[#64748B] mt-4"><p class="salary">${interviewList[i].salary}</p></div>
 
                  <div class="px-6 mt-5 ">
-                      <div><button id="not-applied-btn" class=" status-btn btn font-medium bg-[#EEF4FF] text-[14px] rounded-[4px]">Not Applied</button></div>
-                      <p class="description text-[#323B49] mt-2 ">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                      <div><button id="not-applied-btn" class="status-btn btn font-medium bg-[#EEF4FF] text-[14px] rounded-[4px]">${interviewList[i].statusBtn}</button></div>
+                      <p class="description text-[#323B49] mt-2 ">${interviewList[i].description}</p>
                     </div>
               <div class="card-actions justify-start px-6 mt-5 gap-2">
                    <div class="">
@@ -133,5 +141,6 @@ mainSection.addEventListener("click",function(event){
         `
          filteredSection.appendChild(div);
     }
+    count();
 
  }
