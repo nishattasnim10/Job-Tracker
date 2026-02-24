@@ -1,4 +1,4 @@
-let interviewList=[{name:1}];
+let interviewList=[];
 let rejectedList=[];
 
 let total=document.getElementById("total-count");
@@ -8,10 +8,11 @@ let interviewCount=document.getElementById("interview-count");
 let rejectedCount=document.getElementById("rejected-count");
 // console.log("selected");
 
-let allCards=document.getElementById("allCards");
- console.log(allCards.children.length);
 
- let mainSection=document.querySelector('main');
+const allCards=document.getElementById('allCards');
+//  console.log(allCards.children.length);
+
+ const mainSection=document.querySelector('main');
  console.log(mainSection);
 
  function count(){
@@ -43,7 +44,94 @@ const rejectedFilterBtn=document.getElementById("rejected-filter-btn");
     selected.classList.remove("bg-white","text-[#64748B]");
     selected.classList.add("bg-blue-500","text-white");
 
+    // show selected card section in interview tab
+    if(id=="interview-filter-btn"){
+        allCards.classList.add("hidden");
+        filteredSection.classList.remove("hidden");
+    }
+    else if(id=="all-filter-btn"){
+        allCards.classList.remove("hidden");
+        filteredSection.classList.add("hidden");
+    }
+
+ }
+
+// 
 
 
+mainSection.addEventListener("click",function(event){
+
+    console.log(event.target);
+
+    console.log(event.target.classList.contains("interview-btn"));
+    if(event.target.classList.contains("interview-btn")){
+        console.log(event.target.parentNode.parentNode.parentNode);
+    const jobCard=event.target.parentNode.parentNode.parentNode;
+
+    const jobName =jobCard.querySelector('.company-name').innerText;
+    const position=jobCard.querySelector('.position').innerText;
+    const salary=jobCard.querySelector('.salary').innerText;
+    const statusBtn=jobCard.querySelector('.status-btn').innerText;
+    const description=jobCard.querySelector('.description').innerText;
+    // console.log(jobName,position,salary,statusBtn,description);
+
+    const cardInfo={jobName,position,salary,statusBtn,description};
+    
+
+    const cardExist = interviewList.find(item =>item.jobName == cardInfo.jobName);
+    jobCard.querySelector('.status-btn').innerText="Interview";
+    jobCard.querySelector('.status-btn').classList.remove("bg-[#EEF4FF]","text-[14px]");
+    jobCard.querySelector('.status-btn').classList.add("bg-green-100","text-green-600", "border", "border-green-700");
+
+
+    if(!cardExist){
+     interviewList.push(cardInfo);
+     }
+
+    renderInterviewList();
+
+    }
+    
+})
+
+ const filteredSection=document.getElementById("filtered-section");
+ function renderInterviewList(){
+    filteredSection.innerHTML="";
+
+    for(let i=0;i<interviewList.length;i++){
+        console.log(interviewList);
+
+        let div=document.createElement("div");
+
+        div.className="card bg-white w-[1110px] h-[295px] shadow-sm mt-4 mx-auto";
+        div.innerHTML=`
+        <div class="px-6">
+                     <h2 id="company-name" class="mt-6 font-semibold text-[18px]">Mobile First Corp</h2>
+                     <p id="position" class="text-[16px] text-[#64748B] mt-1">React Native Developer</p>
+                      <div  class="flex justify-end" >
+                       <button class=" flex justify-end p-[8px] cursor-pointer rounded-full border border-slate-200 mt-[-30px]" > <i class="fa-regular fa-trash-can " style="color: #64748B;"></i></button>
+                      </div>    
+                </div>
+                 <div  class="px-6 text-[14px] text-[#64748B] mt-4"><p class="salary">Remote •     Full-time • $130,000 - $175,000</p></div>
+
+                 <div class="px-6 mt-5 ">
+                      <div><button id="not-applied-btn" class=" status-btn btn font-medium bg-[#EEF4FF] text-[14px] rounded-[4px]">Not Applied</button></div>
+                      <p class="description text-[#323B49] mt-2 ">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    </div>
+              <div class="card-actions justify-start px-6 mt-5 gap-2">
+                   <div class="">
+                        <button  class="interview-btn btn text-[14px] text-green-500 border-green-600">Interview</button>
+                    </div>
+                    <div class="">
+                         <button class="rejected-btn btn font-[24px] text-red-500 border-red-600">Rejected</button>
+
+                    </div>
+                
+                </div>
+        
+        
+        `
+         filteredSection.appendChild(div);
+    }
 
  }
