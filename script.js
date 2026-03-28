@@ -18,8 +18,16 @@ function count(){
     total.innerText= allCards.children.length;
     interviewCount.innerText= interviewList.length;
     rejectedCount.innerText= rejectedList.length;
+
+    updateJobCountText();
 }
 count();
+
+function updateJobCountText(){
+    const jobCountDisplay = document.querySelector('main h1 + p');
+    const currentCount = allCards.children.length;
+    jobCountDisplay.innerText= `${currentCount} jobs`;
+}
 
 function toggleStyle(id){
     allFilterBtn.classList.remove("bg-blue-500","text-white");
@@ -36,7 +44,10 @@ function toggleStyle(id){
     selected.classList.remove("bg-white","text-[#64748B]");
     selected.classList.add("bg-blue-500","text-white");
 
-    if (id == "interview-filter-btn"){
+    const hiddenMain = document.getElementById("hidden-main");
+    // -----------------------
+
+    if (id== "interview-filter-btn"){
         allCards.classList.add("hidden");
         filteredSection.classList.remove("hidden");
         renderInterviewList(); 
@@ -45,6 +56,7 @@ function toggleStyle(id){
     else if (id== "all-filter-btn"){
         allCards.classList.remove("hidden");
         filteredSection.classList.add("hidden");
+        hiddenMain.style.display = "none";
     } 
     
     else if (id== "rejected-filter-btn"){
@@ -54,7 +66,7 @@ function toggleStyle(id){
     }
 }
 
- mainSection.addEventListener("click",function (event){
+ mainSection.addEventListener("click",function(event){
 
     if (event.target.classList.contains("interview-btn")){
         const jobCard = event.target.parentNode.parentNode.parentNode;
@@ -75,11 +87,8 @@ function toggleStyle(id){
             interviewList.push(cardInfo);
         }
 
-       
-        
         rejectedList = rejectedList.filter(item => item.jobName !== cardInfo.jobName);
-
-        
+  
         if (currentStatus == 'rejected-filter-btn'){
             renderRejectedList();
         }
@@ -116,20 +125,54 @@ function toggleStyle(id){
         if (currentStatus== "interview-filter-btn"){
             renderInterviewList();
         }
+
+
         count();
         renderRejectedList();
+    }
+    //  delete btn part
+
+    else if (event.target.closest('.btn-delete')) {
+        const jobCard = event.target.closest('.card');
+        const jobName = jobCard.querySelector('.company-name').innerText;
+
+        jobCard.remove();
+
+        interviewList = interviewList.filter(item => item.jobName !== jobName);
+        rejectedList = rejectedList.filter(item => item.jobName !== jobName);
+
+        //update count and text
+        count();
+        updateJobCountText();
     }
 });
 
 function renderInterviewList(){
+    // if empty 
+    const hiddenMain = document.getElementById("hidden-main"); 
     filteredSection.innerHTML = '';
+    if (interviewList.length === 0) {
+        filteredSection.classList.add("hidden"); 
+        hiddenMain.style.display = "block";      
+        return; 
+    }
+    else{
+        hiddenMain.style.display = "none";
+        filteredSection.classList.remove("hidden");
+
+    }
+    
+    
     for (let i = 0; i < interviewList.length; i++){
         let div = document.createElement("div");
-        div.className= "card bg-white w-full shadow-sm mt-4 mx-auto p-6"; // Styling fix
+        div.className= "card bg-white w-full shadow-sm mt-4 mx-auto p-6"; 
         div.innerHTML= `
         <div class="px-6">
             <h2 class="company-name mt-6 font-semibold text-[18px]">${interviewList[i].jobName}</h2>
             <p class="position text-[16px] text-[#64748B] mt-1">${interviewList[i].position}</p>
+            <div  class="flex justify-end" >
+                <button class="btn-delete flex justify-end p-[8px] cursor-pointer rounded-full border border-slate-200 mt-[-30px]" > <i class="fa-regular fa-trash-can " style="color: #64748B;"></i></button>
+            </div>
         </div>
         <div class="px-6 text-[14px] text-[#64748B] mt-4"><p class="salary">${interviewList[i].salary}</p></div>
         <div class="px-6 mt-5 ">
@@ -145,14 +188,32 @@ function renderInterviewList(){
 }
 
 function renderRejectedList(){
+    
+    // if rejected tab empty
+    const hiddenMain = document.getElementById("hidden-main");
     filteredSection.innerHTML = '';
+
+    if (rejectedList.length === 0){
+        filteredSection.classList.add("hidden");
+        hiddenMain.style.display = "block";
+        return;
+    }
+    else{
+        hiddenMain.style.display = "none";
+        filteredSection.classList.remove("hidden");
+
+    }
+    
     for (let i = 0; i < rejectedList.length; i++){
         let div = document.createElement("div");
-        div.className= "card bg-white w-full shadow-sm mt-4 mx-auto p-6"; // Styling fix
+        div.className= "card bg-white w-full shadow-sm mt-4 mx-auto p-6"; 
         div.innerHTML= `
         <div class="px-6">
             <h2 class="company-name mt-6 font-semibold text-[18px]">${rejectedList[i].jobName}</h2>
             <p class="position text-[16px] text-[#64748B] mt-1">${rejectedList[i].position}</p>
+            <div  class="flex justify-end" >
+                       <button class="btn-delete flex justify-end p-[8px] cursor-pointer rounded-full border border-slate-200 mt-[-30px]" > <i class="fa-regular fa-trash-can " style="color: #64748B;"></i></button>
+             </div>
         </div>
         <div class="px-6 text-[14px] text-[#64748B] mt-4"><p class="salary">${rejectedList[i].salary}</p></div>
         <div class="px-6 mt-5 ">
